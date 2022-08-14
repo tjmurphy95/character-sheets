@@ -15,4 +15,17 @@ router.get(
     res.redirect("/dashboard");
   }
 );
+
+//@desc --- logout user
+//route --- GET /auth/logout
+
+router.get("/logout", function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+
 module.exports = router;
