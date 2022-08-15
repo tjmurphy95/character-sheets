@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// to do - add extra attributes to match dnd 5e char sheet
 const CharacterSchema = new mongoose.Schema({
   name: {
     type: String,

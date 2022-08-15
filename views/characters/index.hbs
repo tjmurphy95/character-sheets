@@ -1,0 +1,25 @@
+<h1>Characters</h1>
+<div class="row">
+    {{#each stories}}
+<div class="col s12 m4"></div>
+<div class="card">
+    <div class="card-img">
+        {{!-- todo: edit icon --}}
+    </div>
+    <div class="card-content center-align">
+        <h5>{{name}}</h5>
+        <p>{{description}}</p>
+        <br>
+        <div class="chip">
+            <img src="{{user.image}}" alt="display picture">
+            <a href="/characters/user/{{user._id}}">{{user.displayName}}</a>
+        </div>
+    </div>
+    <div class="card-action center-align">
+        <a href="/characters/{{_id}}" class="btn grey">Read More</a>
+    </div>
+</div>
+{{else}}
+<p>No characters to display</p>
+    {{/else}}
+</div>

@@ -22,13 +22,29 @@ connectDB();
 //initialize
 const app = express();
 
+//Body parser middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 //logging - only use morgan in dev mode
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+//Handlebars Helpers
+const { formatDate } = require("./helpers/hbs");
+
 //HANDLEBARS - template engine
-app.engine(".hbs", exphbs.engine({ defaultLayout: "main", extname: ".hbs" }));
+app.engine(
+  ".hbs",
+  exphbs.engine({
+    helpers: {
+      formatDate,
+    },
+    defaultLayout: "main",
+    extname: ".hbs",
+  })
+);
 app.set("view engine", ".hbs");
 
 //Sessions
@@ -52,6 +68,7 @@ app.use(express.static(path.join(__dirname, "public")));
 //Routes
 app.use("/", require("./routes/index"));
 app.use("/auth", require("./routes/auth"));
+app.use("/characters", require("./routes/characters"));
 
 const PORT = process.env.PORT || 5000;
 
